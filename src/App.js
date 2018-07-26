@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-import {Route, Link} from 'react-router-dom';
+import { Route, Link } from "react-router-dom";
+import NavBar from "./NavBar";
 
 class App extends Component {
   render() {
@@ -12,52 +13,67 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">React-Routes</h1>
         </header>
-       <ul>
-         <li><Link to="/">Landing</Link></li>
-         <li><Link to="/home">HOME</Link></li>
-         <li><Link to="/about">ABOUT</Link></li>
-         <li><Link to="/llama">LLAMA</Link></li>
-       </ul>
+        <NavBar />
 
-       <Route path="/" exact={true} component= {Landing} />
-       <Route path="/home" component={Home} />
-       <Route path="/about" component={About} />
-       <Route path="/llama" component={Llama} />
+        <Route path="/" exact={true} component={Landing} />
+        <Route path="/home" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/llama" component={Llama} />
+        <Route path="/llama/:llamas" component={SpecificLlama} />
       </div>
     );
   }
 }
 
-
-const Landing = (props) => {
-  return(
+const Landing = props => {
+  return (
     <div>
       <h1>This is the crash-landing page!</h1>
-      </div>
+    </div>
   );
-}
+};
 
-const Home = (props) => {
-  return(
+const Home = props => {
+  return (
     <div>
       <h1>Welcome Home!</h1>
-      </div>
+    </div>
   );
-}
-const About= (props) => {
-  return(
+};
+const About = props => {
+  return (
     <div>
-      <h1>About!
-      </h1>
-      </div>
+      <h1>About!</h1>
+    </div>
   );
-}
-const Llama = (props) => {
-  return(
+};
+const Llama = props => {
+  return (
     <div>
       <h1>Welcome Llamas! Our overlords!</h1>
-      </div>
+      <ul>
+        <li>
+          <Link to={`${props.match.url}/schllama`}>Schllama Llama</Link>
+        </li>
+        <li>
+          <Link to={`${props.match.url}/mama`}>Mama Llama</Link>
+        </li>
+        <li>
+          <Link to={`${props.match.url}/rama`}>Rama Llama</Link>
+        </li>
+      </ul>
+    </div>
   );
-}
+};
+
+const SpecificLlama = props => {
+  console.log(props);
+  return (
+    <div>
+      <h1>This is the coolest Llama</h1>
+      <h2>{props.match.params.llamas}</h2>
+    </div>
+  );
+};
 
 export default App;
