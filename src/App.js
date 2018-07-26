@@ -47,12 +47,27 @@ const About = props => {
     </div>
   );
 };
+
+const formatAsLink = (toUrl, name) => {
+  return <li><Link to={toUrl}>{name}</Link></li>
+}
+
+
+
 const Llama = props => {
+
+  let allLlama = [
+    'Schllama llama',
+    'Mama llama',
+    'Rama llama'
+  ];
+
   return (
     <div>
       <h1>Welcome Llamas! Our overlords!</h1>
       <ul>
-        <li>
+        {allLlama.map(llama => formatAsLink(`${props.match.url}/${llama}`, llama))}
+        {/* <li>
           <Link to={`${props.match.url}/schllama`}>Schllama Llama</Link>
         </li>
         <li>
@@ -60,7 +75,7 @@ const Llama = props => {
         </li>
         <li>
           <Link to={`${props.match.url}/rama`}>Rama Llama</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
